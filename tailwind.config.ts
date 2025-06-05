@@ -1,4 +1,5 @@
 import type { Config } from "tailwindcss";
+// import { fontFamily } from "tailwindcss/defaultTheme"; // Cannot add imports
 
 export default {
 	darkMode: ["class"],
@@ -18,6 +19,12 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+                // To use the new --font-sans variable for the sans utility classes:
+                // sans: ["var(--font-sans)", ...fontFamily.sans], // Ideal, but can't import fontFamily easily here.
+                // Simpler approach: CSS variable already includes fallbacks.
+                sans: ['var(--font-sans)'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -52,7 +59,7 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
-				sidebar: {
+				sidebar: { // Sidebar colors remain as they are referenced from existing CSS vars
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
 					primary: 'hsl(var(--sidebar-primary))',
@@ -63,7 +70,7 @@ export default {
 					ring: 'hsl(var(--sidebar-ring))'
 				}
 			},
-			borderRadius: {
+			borderRadius: { // Will use the updated --radius from CSS
 				lg: 'var(--radius)',
 				md: 'calc(var(--radius) - 2px)',
 				sm: 'calc(var(--radius) - 4px)'
